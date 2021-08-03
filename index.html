@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="./css/todolist.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;500;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrap">
+        <nav class="sidebar">
+            <div class="user_avatar">
+                <img src="./img/user.jpg" alt="">
+            </div>
+            <div class="user_name">文森佐·卡薩諾</div>
+            <div class="main_nav">
+                <ul>
+                    <li>Schedule</li>
+                    <li class="current">To Do List</li>
+                    <li>Message</li>
+                </ul>
+            </div>
+        </nav>
+        <div class="main_content">
+            <header class="view_header">
+                <div class="nav_toggle"></div>
+                <h1>ToDoList</h1>
+                <span class="today"></span>
+            </header>
+            <div class="view_content">
+                <div class="items_tab">
+                    <ul>
+                        <li class="items_tab_current">DO</li>
+                        <li>DONE</li>
+                        <li>MEMO</li>
+                    </ul>
+                </div>
+                <div class="items">
+                    <div class="close_bg"></div>
+                    <div class="item_top">
+                        <h3>DO</h3>
+                        <div class="dolist_edit edit">
+                            <i></i>
+                            <ul>
+                                <li>新增</li>
+                                <li>刪除</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item_contant">
+                        <ol class="dolist"> 
+                        </ol>
+                    </div>
+                    <div class="add_modal">
+                        <div class="add_modal_input">
+                            <input type="text" name="" id="title" autofocus>
+                            <button class="add_modal_save">新增</button>
+                            <button class="add_modal_close">關閉</button>
+                        </div>
+                        <div class="add_modal_bg"></div>
+                    </div>
+
+                </div>
+                <div class="items">
+                    <div class="close_bg"></div>
+                    <div class="item_top">
+                        <h3>DONE</h3>
+                        <div class="donelist_edit edit">
+                            <i></i>
+                            <ul>
+                                <li>刪除</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item_contant">
+                        <ul class="donelist"></ul>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item_top">
+                        <h3>MEMO</h3>
+                    </div>
+                    <div class="item_contant">
+                        <textarea name="" id="txt">請輸入內容....
+                        </textarea>
+                        <button id="btn">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+        integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=='
+        crossorigin='anonymous'></script>
+    <script src="./js/todolist.js"></script>
+
+</body>
+
+</html>
