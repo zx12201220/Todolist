@@ -294,6 +294,7 @@ body {
   border-radius: 25px;
   background-color: black;
   opacity: 0.5;
+  cursor: pointer;
 }
 /* 新增視窗END------------------------ */
 .items .item_top {
