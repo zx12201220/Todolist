@@ -455,6 +455,10 @@ body {
   opacity: .5;
   transition: all 0.6s;
 }
+.dolist li > p,
+.donelist li > p {
+  font-size: 18px;
+}
 .animate {
   position: absolute;
   right: 0;
