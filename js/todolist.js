@@ -78,7 +78,7 @@ $(function () {
     }
   })
   function widthLoad() {
-    let width = $(window).width();  
+    let width = $(window).width();
     if (width > 1350) {
       $('.sidebar').show();
       $('.nav_toggle').hide();
@@ -114,18 +114,32 @@ $(function () {
     $(".add_modal").fadeOut("fast");
   });
   //刪除按鈕
+  let closeFlag = true;
   $(".dolist_edit ul li:eq(1)").on("click", function () {
     if ($(".dolist li").length !== 0) {
       $(".dolist li>i").toggleClass("displayNone");
       $(this).parents(".item_top").siblings(".close_bg").toggle();
+      closeFlag = false;
     }
   });
   $(".donelist_edit ul li:eq(0)").on("click", function () {
     if ($(".donelist li").length !== 0) {
       $(".donelist li>i").toggleClass("displayNone");
       $(this).parents(".item_top").siblings(".close_bg").toggle();
+      closeFlag = false;
     }
   });
+  $(document).on('click', function (e) {
+    let target = $(e.target);
+    if (!closeFlag && target[0] == $('.close_bg')[0]) {
+      $(".dolist li>i").toggleClass("displayNone");
+      $('.close_bg').hide();
+    }
+    if (!closeFlag && target[0] == $('.close_bg')[1]) {
+      $(".donelist li>i").toggleClass("displayNone");
+      $('.close_bg').hide();
+    }
+  })
   //done按鈕點擊事件
   $(".dolist").on("click", "li>label", function () {
     $(this).siblings(":checkbox").prop("checked", true);
@@ -154,6 +168,7 @@ $(function () {
     saveData(data);
     load();
     $(".close_bg").hide();
+    closeFlag = true;
   });
   $(".donelist").on("click", ".close", function () {
     let data = getData();
@@ -165,17 +180,23 @@ $(function () {
   });
   //todolist正在進行和已完成操作
   $(".dolist,.donelist").on("click", "label", function () {
-    let data = getData();
-    let index = $(this).siblings("i").attr("id");
-    data[index].done = $(this).siblings(":checked").prop("checked");
-    saveData(data);
-    load();
+    if (closeFlag) {
+      let data = getData();
+      let index = $(this).siblings("i").attr("id");
+      data[index].done = $(this).siblings(":checked").prop("checked");
+      saveData(data);
+      load();
+    }
   });
   $(".dolist").on("mouseenter", "label", function () {
-    $(this).siblings('.animate').css("width", "80%");
+    if (closeFlag) {
+      $(this).siblings('.animate').css("width", "80%");
+    }
   });
   $(".dolist").on("mouseleave", "label", function () {
-    $(this).siblings('.animate').css("width", "0%");
+    if (closeFlag) {
+      $(this).siblings('.animate').css("width", "0%");
+    }
   });
 
 
