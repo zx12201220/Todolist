@@ -1,4 +1,5 @@
 $(function () {
+  widthLoad();
   load();
   $(".today").html(getTime());
   function getTime() {
@@ -16,46 +17,76 @@ $(function () {
     return y + "." + m + "." + d;
   }
 
-    //讀取數據
-    function getData() {
-      let data = localStorage.getItem("todolist");
-      if (data !== null) {
-        return JSON.parse(data);
-      } else {
-        return [];
-      }
+  //讀取數據
+  function getData() {
+    let data = localStorage.getItem("todolist");
+    if (data !== null) {
+      return JSON.parse(data);
+    } else {
+      return [];
     }
-    //儲存數據
-    function saveData(data) {
-      localStorage.setItem("todolist", JSON.stringify(data));
-    }
-    //渲染頁面
-    function load() {
-      let data = getData();
-      $(".dolist,.donelist").empty();
-  
-      $.each(data, function (i, n) {
-        if (n.done) {
-          $(".donelist").append(
-            '<li><input type="checkbox" name="" id="" class="done_btn"><label></label><i class= "close displayNone" id=' +
-              i +
-              "> X</i ><p> " +
-              n.title +
-              "</p></li >"
-          );
-          $(".donelist label").attr("data-content", "");
-        } else {
-          $(".dolist").append(
-            '<li><input type="checkbox" name="" id="" class="done_btn"><div class="animate">DONE</div><label></label><i class= "close displayNone" id=' +
-              i +
-              "> X</i ><p> " +
-              n.title +
-              "</p></li >"
-          );
-        }
-      });
-    }
+  }
+  //儲存數據
+  function saveData(data) {
+    localStorage.setItem("todolist", JSON.stringify(data));
+  }
+  //渲染頁面
+  function load() {
+    let data = getData();
+    $(".dolist,.donelist").empty();
 
+    $.each(data, function (i, n) {
+      if (n.done) {
+        $(".donelist").append(
+          '<li><input type="checkbox" name="" id="" class="done_btn"><label></label><i class= "close displayNone" id=' +
+          i +
+          "> X</i ><p> " +
+          n.title +
+          "</p></li >"
+        );
+        $(".donelist label").attr("data-content", "");
+      } else {
+        $(".dolist").append(
+          '<li><input type="checkbox" name="" id="" class="done_btn"><div class="animate">DONE</div><label></label><i class= "close displayNone" id=' +
+          i +
+          "> X</i ><p> " +
+          n.title +
+          "</p></li >"
+        );
+      }
+    });
+  }
+
+  //sidebar nav切換
+  let flag = true;
+  $('.nav_toggle').on('click', function () {
+    $('.sidebar').show().css('position', 'absolute');
+    $('.nav_close').show();
+    $('.nav_bg').show();
+    flag = false;
+  })
+  $('.nav_close').on('click', function () {
+    $('.sidebar').hide().css('position', 'relative');
+    $('.nav_close').hide();
+    $('.nav_bg').hide();
+    flag = true;
+    widthLoad();
+  })
+  $(window).on('resize', function () {
+    if (flag) {
+      widthLoad();
+    }
+  })
+  function widthLoad() {
+    let width = $(window).width();  
+    if (width > 1350) {
+      $('.sidebar').show();
+      $('.nav_toggle').hide();
+    } else {
+      $('.sidebar').hide();
+      $('.nav_toggle').show();
+    }
+  }
   //手機端 item tab切換
   let itemsIndex;
   $(".items").eq(0).show();
@@ -127,7 +158,6 @@ $(function () {
   $(".donelist").on("click", ".close", function () {
     let data = getData();
     let index = $(this).attr("id");
-    // console.log(index);
     data.splice(index, 1);
     saveData(data);
     load();
@@ -137,27 +167,24 @@ $(function () {
   $(".dolist,.donelist").on("click", "label", function () {
     let data = getData();
     let index = $(this).siblings("i").attr("id");
-    console.log(index);
     data[index].done = $(this).siblings(":checked").prop("checked");
-    console.log($(this).siblings(":checked").prop("checked"));
-    console.log(data);
     saveData(data);
     load();
   });
   $(".dolist").on("mouseenter", "label", function () {
-    $(this).siblings('.animate').css("width","80%");
+    $(this).siblings('.animate').css("width", "80%");
   });
   $(".dolist").on("mouseleave", "label", function () {
-    $(this).siblings('.animate').css("width","0%");
+    $(this).siblings('.animate').css("width", "0%");
   });
 
 
-    //初始載入 memo
-    if (localStorage.getItem("memo") == "") {
-      $("#txt").val("請輸入內容....");
-    } else {
-      $("#txt").val(localStorage.getItem("memo"));
-    }
+  //初始載入 memo
+  if (localStorage.getItem("memo") == "") {
+    $("#txt").val("請輸入內容....");
+  } else {
+    $("#txt").val(localStorage.getItem("memo"));
+  }
   //memo save
   $("#btn").click(function () {
     var txt = document.querySelector("#txt").value;

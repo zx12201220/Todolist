@@ -16,14 +16,6 @@
   font-display: block;
 }
 
-@media screen and (max-width: 1400px) {
-  .sidebar {
-    display: none;
-  }
-  .view_header .nav_toggle {
-    display: block;
-  }
-}
 @media screen and (min-width: 984px) {
   .view_content .items {
     height: 80vh !important;
@@ -77,10 +69,12 @@ body {
   display: flex;
 }
 .sidebar {
+  position: relative;
   width: 220px;
   height: 100vh;
   background-color: #0f4a46;
   overflow: hidden;
+  z-index: 999;
 }
 
 .user_avatar {
@@ -104,7 +98,7 @@ body {
 
 .main_nav ul {
   width: 100%;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 .main_nav ul li {
   margin: 15px 0;
@@ -120,6 +114,26 @@ body {
   opacity: 1;
 }
 
+.nav_close {
+  display: none;
+  font-family: "icomoon";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  text-align: center;
+  font-size: 35px;
+  color: #fff;
+  cursor: pointer;
+}
+.nav_bg {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: .8;
+  z-index: 998;
+}
 .current {
   opacity: 1 !important;
 }
@@ -141,7 +155,6 @@ body {
 .nav_toggle {
   font-family: "icomoon";
   font-size: 50px;
-  display: none;
   cursor: pointer;
 }
 
