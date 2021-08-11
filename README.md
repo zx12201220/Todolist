@@ -1,7 +1,7 @@
 # Todolist
 本次專案主要是透過localStorage本地儲存<br>
 操作DOM來練習簡單的CRUD 透過資料來渲染畫面<br>
-來製作的**Todolist 代辦事項!**
+來製作的**Todolist 待辦事項!**
 # Demo
 [Github Pages](https://zx12201220.github.io/Todolist/)
 # 使用技術
